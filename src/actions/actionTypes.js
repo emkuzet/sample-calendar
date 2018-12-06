@@ -1,0 +1,4 @@
+export const FETCH_DATA = 'FETCH_DATA';
+export const FETCH_ERROR = 'FETCH_ERROR';
+export const FETCH_DATA_SUCCESS = 'FETCH-DATA-SUCCESS';
+export const SINGLE_EDIT = 'SINGLE_EDIT';
