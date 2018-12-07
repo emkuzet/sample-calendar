@@ -6,8 +6,8 @@ const devTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initStore = {
     fetchStatus: false,
-    sampleData : {},
-    calendarItem: {},
+    sampleData : [],
+    calendarItem: [],
     editItem: {},
 
 }

@@ -2,3 +2,6 @@ export const FETCH_DATA = 'FETCH_DATA';
 export const FETCH_ERROR = 'FETCH_ERROR';
 export const FETCH_DATA_SUCCESS = 'FETCH-DATA-SUCCESS';
 export const SINGLE_EDIT = 'SINGLE_EDIT';
+export const CREATE_CALENDAR = 'CREATE_CALENDAR';
+export const EDIT_CALENDAR = 'EDIT_CALENDAR';
+export const FILL_DATA = 'FILL_DATA';

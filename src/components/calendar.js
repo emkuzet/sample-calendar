@@ -6,12 +6,17 @@ class Calendar extends Component {
     render(){
         return(
             <div>
-                
+            
             </div>
         )
     }
     
 
+}
+
+function search(){
+
+    
 }
 
 const stateToProps = state =>( {
