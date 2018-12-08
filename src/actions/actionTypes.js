@@ -5,5 +5,6 @@ export const SINGLE_EDIT = 'SINGLE_EDIT';
 export const CREATE_CALENDAR = 'CREATE_CALENDAR';
 export const EDIT_CALENDAR = 'EDIT_CALENDAR';
 export const FILL_DATA = 'FILL_DATA';
+export const FILL_NOTE = 'FILL_NOTE';
 export const ADD_NOTE = 'ADD_NOTE';
 export const EDIT_NOTE = 'EDIT_NOTE';

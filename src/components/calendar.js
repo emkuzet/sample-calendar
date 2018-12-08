@@ -7,22 +7,63 @@ class Calendar extends Component {
     constructor(props){
         super(props)
 
+        this.state = {
+            filsterStatus: false,
+            filter: []
+        };
+
         this.checkinput = this.checkinput.bind(this);
     }
 
     checkinput(event){
-        console.log(event.target.value)
+        let inputValue = event.target.value;
+        
+
+        const regex = new RegExp("(" + inputValue + ")");
+        const isEven = n => R.test(regex, n.note);
+        
+        const filteredValue = R.filter(
+                isEven , this.props.noteList
+            )
+
+        this.setState((state) => {
+                return {
+                    filterStatus : true,
+                    filter: filteredValue
+                }
+            }
+        )
     }
  
     render(){
+        console.log(this.state.filter);
         return(
             <div>
                 <input type='text' onChange={(event) => this.checkinput(event)} />
+                <NoteList props={this.props.noteList}/>
             </div>
         )
     }
     
+}
 
+function NoteList(props){
+    
+    const allNotes = props ? props : null;
+
+    const sortByDate = R.sortBy(R.prop('date'));
+    const sortedbyDate = sortByDate(allNotes.props);
+
+
+    const allNoteList = sortedbyDate.map( (single , index) => 
+        <p key={index}>{single.date} {single.note}</p>
+     )
+
+     
+
+    return(
+        <div>{allNoteList}</div>
+    )
 }
 
 

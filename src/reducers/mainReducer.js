@@ -45,6 +45,12 @@ const todos = (state = [], action) => {
         ...state,
         calendarItem : state.calendarItem.map((singleDay) => singleDay.id === action.id ? {...singleDay, note : action.note }: singleDay)
       }
+
+      case types.FILL_NOTE:
+      return {
+        ...state,
+        noteList : [...state.noteList, { date: action.date , note: action.note }]
+      }
       
       default:
         return state

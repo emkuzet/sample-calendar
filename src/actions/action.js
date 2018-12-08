@@ -1,4 +1,5 @@
 import * as types from './actionTypes';
+import {getRandomInt, fillSingleData } from './helpers';
 
 export const createCalendar = (inputMonth, inputYear) => ({
     type: types.CREATE_CALENDAR,
@@ -9,18 +10,6 @@ export const editCalendar = (id) => ({
     type: types.EDIT_CALENDAR,
     id: id, 
     note: 'TEST'
-});
-
-export const addNote = (date ,sampleData) => ({
-    type: types.FILL_DATA,
-    date: date, 
-    note: sampleData[getRandomInt(10)].name
-});
-
-export const editNote = (date, payload) => ({
-    type: types.EDIT_NOTE,
-    date: date,
-    note: payload
 });
 
 function daysInMonth(inputMonth, inputYear) {
@@ -40,12 +29,6 @@ function createMonthCalendar(inputMonth, inputYear){
 
 }
 
-export const fillNote = (sampleData) => dispatch => {
-    dispatch(fillSingleData(sampleData, getRandomInt(30)))
-    dispatch(fillSingleData(sampleData, getRandomInt(30)))
-    dispatch(fillSingleData(sampleData, getRandomInt(30)))
-    dispatch(fillSingleData(sampleData, getRandomInt(30)))
-}
 
 export const fillCalendar = (sampleData) => dispatch => {
     dispatch(fillSingleData(sampleData, getRandomInt(30)))
@@ -55,12 +38,3 @@ export const fillCalendar = (sampleData) => dispatch => {
 }
 
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
-
-export const fillSingleData = (sampleData, id) => ({
-    type: types.FILL_DATA,
-    id: id, 
-    note: sampleData[getRandomInt(10)].name
-})

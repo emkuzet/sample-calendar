@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createCalendar, fillCalendar } from '../actions/action';
-import { fetchDataSuccess } from '../actions/actionsFetch';
 import SearchSingle from './searchSingle';
 import PropTypes  from 'prop-types';
 import './search.scss';
@@ -51,7 +50,6 @@ class Search extends Component {
         let currentYear= new Date().getFullYear();
 
         this.props.createCalendarOnInit(currentMonth, currentYear)
-        this.props.PullApi();
     }
 
     
@@ -83,7 +81,6 @@ const stateToProps = (state) => {
 };
 
 const actionToProps =  dispatch => ({
-    PullApi : () => dispatch(fetchDataSuccess()),
     createCalendarOnInit : (inputMonth, inputYear) => dispatch(createCalendar(inputMonth, inputYear)),
     FillCalendar : (sampleData) => dispatch(fillCalendar(sampleData))
 })
