@@ -11,6 +11,7 @@ class SearchSingle extends Component{
     }
 
     editItem(id){
+        console.log(id);
         this.props.EditCalendar(id);
     }   
 

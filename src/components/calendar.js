@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as R from 'ramda';
 
-
 class Calendar extends Component {
 
     constructor(props){
@@ -72,8 +71,6 @@ function NoteList(props){
         <p key={index}>{single.date} {single.note}</p>
      )
 
-     
-
     return(
         <div>{allNoteList}</div>
     )
@@ -96,7 +93,7 @@ const stateToProps = state =>{
 };
 
 const actionToProps = dispatch =>({
-       // pullData : () => dispatch(pullData())
+    
 })
 
 

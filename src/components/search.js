@@ -54,8 +54,7 @@ class Search extends Component {
 
     
     render() {
-        console.log(this.state.currentMonth);
-
+ 
         return(
             <div className="Container">
                  <div className="Navigation">
@@ -67,7 +66,7 @@ class Search extends Component {
 
                  <div className="Calendar">
                     {this.props.calendarItem.map((days, index )  => 
-                        <SearchSingle key={index} number={days.id} note={days.note} /> , this
+                        <SearchSingle key={index} number={days.date} note={days.note} /> , this
                     )}
                 </div>
             </div>
@@ -84,9 +83,5 @@ const actionToProps =  dispatch => ({
     createCalendarOnInit : (inputMonth, inputYear) => dispatch(createCalendar(inputMonth, inputYear)),
     FillCalendar : (sampleData) => dispatch(fillCalendar(sampleData))
 })
-
-Search.propTypes = {
-    PullApi: PropTypes.func.isRequired
-}
 
 export default connect(stateToProps,actionToProps)(Search);

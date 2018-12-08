@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { fetchDataSuccess } from './actions/actionsFetch';
-import { fillNote } from './actions/actionNote';
 import Search from "./components/search";
 import Calendar from "./components/calendar";
 import './App.scss';

@@ -1,14 +1,13 @@
 import * as types from './actionTypes';
-import {getRandomInt, fillSingleData } from './helpers';
 
 export const createCalendar = (inputMonth, inputYear) => ({
     type: types.CREATE_CALENDAR,
     calendarItem: createMonthCalendar(inputMonth, inputYear)
 });
 
-export const editCalendar = (id) => ({
+export const editCalendar = (date) => ({
     type: types.EDIT_CALENDAR,
-    id: id, 
+    date: date,
     note: 'TEST'
 });
 
@@ -23,18 +22,21 @@ function createMonthCalendar(inputMonth, inputYear){
     
     do {
         calendarDay = calendarDay + 1;
-        allMonth.push( new Object({ id : calendarDay , date: '2018-' + inputMonth + '-' + calendarDay  , note: ''}));
+        let inputDay = calendarDay;
+        let dayLength = calendarDay.toString().length;
+
+        if( dayLength  === 1 ){
+            inputDay = '0' + inputDay.toString() ;
+        }
+
+        allMonth.push( new Object({ date:  inputDay + '-' + inputMonth +  '-2018', note: ''}));
     } while (calendarDay < daysCount );
     return allMonth;
 
 }
 
 
-export const fillCalendar = (sampleData) => dispatch => {
-    dispatch(fillSingleData(sampleData, getRandomInt(30)))
-    dispatch(fillSingleData(sampleData, getRandomInt(30)))
-    dispatch(fillSingleData(sampleData, getRandomInt(30)))
-    dispatch(fillSingleData(sampleData, getRandomInt(30)))
-}
-
+export const fillCalendar = () => ({
+    type: types.FILL_DATA,
+});
 

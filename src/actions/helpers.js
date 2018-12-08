@@ -6,9 +6,3 @@ export function getRandomInt(max) {
     return number;   
   }
 
-
-export const fillSingleData = (sampleData, id) => ({
-  type: types.FILL_DATA,
-  id: id, 
-  note: sampleData[getRandomInt(10)].name
-})

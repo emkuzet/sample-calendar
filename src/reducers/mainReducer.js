@@ -14,16 +14,11 @@ const todos = (state = [], action) => {
         noteList : [...state.noteList, action.payload]
       }
 
-      case types.EDIT_NOTE:
-      return{
-        ...state,
-        noteList :  state.noteList.map((singleNote) => singleNote.id === action.id ? {...singleNote,  note : action.note }: singleNote)
-      }
 
       case types.EDIT_CALENDAR:
       return{
         ...state,
-        calendarItem : state.calendarItem.map((singleDay) => singleDay.id === action.id ? {...singleDay, note : action.note }: singleDay)
+        calendarItem : state.calendarItem.map((singleDay) => singleDay.date === action.date ? {...singleDay, note : action.note }: singleDay)
       }
 
       case types.FETCH_DATA:
@@ -40,10 +35,16 @@ const todos = (state = [], action) => {
       case types.SINGLE_EDIT:
       return state
 
+
       case types.FILL_DATA:
       return {
         ...state,
-        calendarItem : state.calendarItem.map((singleDay) => singleDay.id === action.id ? {...singleDay, note : action.note }: singleDay)
+        calendarItem : 
+          state.calendarItem.map(
+            (singleDay) => 
+              singleDay.date === action.date ? 
+              {...singleDay, note : action.note }: singleDay
+              )
       }
 
       case types.FILL_NOTE:
