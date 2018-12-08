@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editCalendar } from '../actions/action';
-
+import { BrowserRouter as Router,  Link } from "react-router-dom";
 
 class SearchSingle extends Component{
 
@@ -27,9 +27,9 @@ class SearchSingle extends Component{
 
         return(
             <div className="single-day" onClick={(e) => this.editItem(this.props.number)}>
-               <div className="single-day-number">
+               <Link to={'../add/' + this.props.number } className="single-day-number">
                     {this.props.number}
-               </div>
+               </Link>
                <div className="single-note">
                     {button}
                 </div>

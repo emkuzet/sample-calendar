@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createCalendar, fillCalendar } from '../actions/action';
 import SearchSingle from './searchSingle';
-import PropTypes  from 'prop-types';
 import './search.scss';
 
 class Search extends Component {

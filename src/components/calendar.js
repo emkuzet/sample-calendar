@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as R from 'ramda';
+import { BrowserRouter as Router,  Link } from "react-router-dom";
 
 class Calendar extends Component {
 
@@ -26,10 +27,13 @@ class Calendar extends Component {
                 isEven , this.props.noteList
             )
 
+        const sortByDate = R.sortBy(R.prop('date'));
+        const sortedbyDate = sortByDate(filteredValue);
+
         this.setState((state) => {
                 return {
                     filterStatus: true,
-                    filter: filteredValue
+                    filter: sortedbyDate
                 }
             }
         )
@@ -68,7 +72,10 @@ function NoteList(props){
 
 
     const allNoteList = sortedbyDate.map( (single , index) => 
-        <p key={index}>{single.date} {single.note}</p>
+        <p key={index}>
+            <Link to={'../edit/'+ single.date} > {single.date} </Link>
+            {single.note}
+        </p>
      )
 
     return(
@@ -78,7 +85,10 @@ function NoteList(props){
 
 function NoteListFilter(input){
     const allNoteList = input.props.map( (single , index) => 
-        <p key={index}>{single.date} {single.note}</p>
+        <p key={index} >
+            <Link to={'../edit/'+ single.date} > {single.date} </Link>
+            {single.note}
+        </p>
      )
 
      return(
