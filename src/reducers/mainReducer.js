@@ -8,6 +8,18 @@ const todos = (state = [], action) => {
           calendarItem: action.calendarItem
         }
 
+      case types.ADD_NOTE:
+      return{
+        ...state,
+        noteList : [...state.noteList, action.payload]
+      }
+
+      case types.EDIT_NOTE:
+      return{
+        ...state,
+        noteList :  state.noteList.map((singleNote) => singleNote.id === action.id ? {...singleNote,  note : action.note }: singleNote)
+      }
+
       case types.EDIT_CALENDAR:
       return{
         ...state,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchDataSuccess, createCalendar, fillCalendar } from '../actions/action';
+import { createCalendar, fillCalendar } from '../actions/action';
+import { fetchDataSuccess } from '../actions/actionsFetch';
 import SearchSingle from './searchSingle';
 import PropTypes  from 'prop-types';
 import './search.scss';
@@ -9,12 +10,36 @@ class Search extends Component {
 
     constructor(props){
         super(props)
+        this.state = {
+            currentMonth : new Date().getMonth(),
+            currentYear : new Date().getFullYear()
+        }
+
         this.FillCalendar = this.FillCalendar.bind(this);
-        this.createCalendar = this.createCalendar.bind(this);
+        this.createCalendarOnInit = this.createCalendarOnInit.bind(this);
+        this.createCalendarNext = this.createCalendarNext.bind(this);
+        this.createCalendarPrev = this.createCalendarPrev.bind(this);
     }
 
-    createCalendar(){
-        this.props.CreateCalendar()
+    createCalendarNext(){
+        this.setState((state) => {
+            return { currentMonth: state.currentMonth + 1};
+        });
+          
+        this.props.createCalendarOnInit( this.state.currentMonth, this.state.currentYear )
+    }
+
+    createCalendarPrev(){
+        this.setState((state) => {
+            return { currentMonth: state.currentMonth - 1};
+        });
+
+        this.props.createCalendarOnInit( this.state.currentMonth, this.state.currentYear )
+    }
+
+    createCalendarOnInit(){
+
+        this.props.createCalendarOnInit(this.state.currentMonth, this.state.currentYear)
     }
 
     FillCalendar(){
@@ -22,20 +47,24 @@ class Search extends Component {
     }
 
     componentDidMount(){
-        this.props.CreateCalendar()
+        let currentMonth = new Date().getMonth() + 1;
+        let currentYear= new Date().getFullYear();
+
+        this.props.createCalendarOnInit(currentMonth, currentYear)
         this.props.PullApi();
     }
 
     
     render() {
+        console.log(this.state.currentMonth);
 
         return(
             <div className="Container">
                  <div className="Navigation">
-                    <div className="nextMonth"> NextMonth </div>
-                    <div className="resetData" onClick={this.createCalendar}> Reset </div>
-                    <div className="fetchData"  onClick={this.FillCalendar}> Fetch Data </div>
-                    <div className="prevMonth"> PrevMonth </div>
+                    <div className="nextMonth" onClick={this.createCalendarNext}> NextMonth </div>
+                    <div className="resetData" onClick={this.createCalendarOnInit}> Reset </div>
+                    <div className="fetchData" onClick={this.FillCalendar}> Fetch Data </div>
+                    <div className="prevMonth" onClick={this.createCalendarPrev}> PrevMonth </div>
                 </div>
 
                  <div className="Calendar">
@@ -55,13 +84,12 @@ const stateToProps = (state) => {
 
 const actionToProps =  dispatch => ({
     PullApi : () => dispatch(fetchDataSuccess()),
-    CreateCalendar : () => dispatch(createCalendar()),
+    createCalendarOnInit : (inputMonth, inputYear) => dispatch(createCalendar(inputMonth, inputYear)),
     FillCalendar : (sampleData) => dispatch(fillCalendar(sampleData))
 })
 
 Search.propTypes = {
-    PullApi: PropTypes.func.isRequired,
-    CreateCalendar: PropTypes.func.isRequired
+    PullApi: PropTypes.func.isRequired
 }
 
 export default connect(stateToProps,actionToProps)(Search);

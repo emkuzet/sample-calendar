@@ -8,6 +8,7 @@ const initStore = {
     fetchStatus: false,
     sampleData : [],
     calendarItem: [],
+    noteList: [],
     editItem: {},
 
 }

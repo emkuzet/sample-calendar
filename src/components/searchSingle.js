@@ -16,13 +16,21 @@ class SearchSingle extends Component{
 
     render() {
 
+        let button;  
+        
+        if(this.props.note){
+            button = this.props.note
+        }else{
+            button = null;
+        }
+
         return(
             <div className="single-day" onClick={(e) => this.editItem(this.props.number)}>
                <div className="single-day-number">
                     {this.props.number}
                </div>
                <div className="single-note">
-                    {this.props.note}
+                    {button}
                 </div>
             </div>
         )

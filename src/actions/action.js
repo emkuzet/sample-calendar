@@ -1,34 +1,8 @@
 import * as types from './actionTypes';
-import axios from 'axios';
 
-export const fetchData = () => ({
-    type: types.FETCH_DATA,
-});
-
-export const fetchDataComplete = (sampleData) => ({
-    type: types.FETCH_DATA_SUCCESS,
-    sampleData
-});
-
-export const fetchError = () => ({
-    type: types.FETCH_ERROR,
-});
-
-export const fetchDataSuccess = () => dispatch => {
-    dispatch(fetchData());
-    return axios.get('https://swapi.co/api/people/').then(function (response) {
-        // handle success
-        dispatch(fetchDataComplete(response.data.results))
-      })
-      .catch(function (error) {
-        dispatch(fetchError());
-        console.log(error);
-      })
-}
-
-export const createCalendar = () => ({
+export const createCalendar = (inputMonth, inputYear) => ({
     type: types.CREATE_CALENDAR,
-    calendarItem: createMonthCalendar()
+    calendarItem: createMonthCalendar(inputMonth, inputYear)
 });
 
 export const editCalendar = (id) => ({
@@ -37,27 +11,40 @@ export const editCalendar = (id) => ({
     note: 'TEST'
 });
 
+export const addNote = (date ,sampleData) => ({
+    type: types.FILL_DATA,
+    date: date, 
+    note: sampleData[getRandomInt(10)].name
+});
 
+export const editNote = (date, payload) => ({
+    type: types.EDIT_NOTE,
+    date: date,
+    note: payload
+});
 
-function daysInMonth(month, year) {
-    return new Date(year, month, 0).getDate() + 1 ;
+function daysInMonth(inputMonth, inputYear) {
+    return new Date(inputYear, inputMonth, 0).getDate();
 }
 
-function createMonthCalendar(){
-
-    let currentMonth = new Date().getMonth();
-    let currentYear= new Date().getFullYear();
-    
-    const daysCount = daysInMonth(currentMonth, currentYear);
+function createMonthCalendar(inputMonth, inputYear){
+    const daysCount = daysInMonth(inputMonth, inputYear);
     let calendarDay = 0;
     let allMonth = [];
     
     do {
         calendarDay = calendarDay + 1;
-        allMonth.push( new Object({ id : calendarDay , note: ''}));
+        allMonth.push( new Object({ id : calendarDay , date: '2018-' + inputMonth + '-' + calendarDay  , note: ''}));
     } while (calendarDay < daysCount );
     return allMonth;
 
+}
+
+export const fillNote = (sampleData) => dispatch => {
+    dispatch(fillSingleData(sampleData, getRandomInt(30)))
+    dispatch(fillSingleData(sampleData, getRandomInt(30)))
+    dispatch(fillSingleData(sampleData, getRandomInt(30)))
+    dispatch(fillSingleData(sampleData, getRandomInt(30)))
 }
 
 export const fillCalendar = (sampleData) => dispatch => {
