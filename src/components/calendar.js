@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as R from 'ramda';
 
+
 class Calendar extends Component {
 
     constructor(props){
         super(props)
 
         this.state = {
-            filsterStatus: false,
+            filterStatus: false,
             filter: []
         };
 
@@ -28,7 +29,7 @@ class Calendar extends Component {
 
         this.setState((state) => {
                 return {
-                    filterStatus : true,
+                    filterStatus: true,
                     filter: filteredValue
                 }
             }
@@ -37,10 +38,22 @@ class Calendar extends Component {
  
     render(){
         console.log(this.state.filter);
+        let dataToShow 
+
+        if( this.state.filterStatus){
+            
+          dataToShow = <NoteListFilter props={this.state.filter}/>
+        
+        }else{
+
+            dataToShow = <NoteList props={this.props.noteList}/>
+        };
+
+
         return(
             <div>
                 <input type='text' onChange={(event) => this.checkinput(event)} />
-                <NoteList props={this.props.noteList}/>
+                {dataToShow}
             </div>
         )
     }
@@ -64,6 +77,17 @@ function NoteList(props){
     return(
         <div>{allNoteList}</div>
     )
+}
+
+function NoteListFilter(input){
+    const allNoteList = input.props.map( (single , index) => 
+        <p key={index}>{single.date} {single.note}</p>
+     )
+
+     return(
+        <div>{allNoteList}</div>
+    )
+        
 }
 
 

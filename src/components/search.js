@@ -46,7 +46,7 @@ class Search extends Component {
     }
 
     componentDidMount(){
-        let currentMonth = new Date().getMonth() + 1;
+        let currentMonth = new Date().getMonth();
         let currentYear= new Date().getFullYear();
 
         this.props.createCalendarOnInit(currentMonth, currentYear)
