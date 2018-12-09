@@ -1,17 +1,29 @@
 import * as types from './actionTypes';
 import {getRandomInt } from './helpers';
+import { fillCalendar} from './action'
 
 export const addNote = (date ,sampleData) => ({
-    type: types.FILL_DATA,
+    type: types.ADD_NOTE,
     date: date, 
-    note: sampleData[getRandomInt(10)].name
+    note: sampleData
 });
 
-export const editNote = (date, payload) => ({
+
+
+
+export const editNoteValue = (date) => ({
     type: types.EDIT_NOTE,
     date: date,
-    note: payload
 });
+
+
+export const editNote = (date ) => dispatch => {
+    return new Promise (function(resolve, reject) {
+          resolve(
+            dispatch(editNoteValue(date))
+          );
+        
+      })};
 
 export const fillSingleNote = (sampleData, eventDate) => ({
     type: types.FILL_NOTE,
@@ -34,9 +46,18 @@ function addZero( singleDay){
 
 
 export const fillNote = (sampleData, currentMonth) => dispatch => {
-    dispatch(fillSingleNote(sampleData, addZero(getRandomInt(28)) + '-' + currentMonth))
-    dispatch(fillSingleNote(sampleData, addZero(getRandomInt(28)) + '-' + currentMonth))
-    dispatch(fillSingleNote(sampleData, addZero(getRandomInt(28)) + '-' + currentMonth))
-    dispatch(fillSingleNote(sampleData, addZero(getRandomInt(28)) + '-' + currentMonth))
-    dispatch(fillSingleNote(sampleData, addZero(getRandomInt(28)) + '-' + currentMonth))
-}
+
+    let allNote = []
+    let i = 0
+    
+    do{
+        i = i + 1;
+       
+        allNote.push(dispatch(fillSingleNote(sampleData, addZero(getRandomInt(28)) + '-' + currentMonth)))
+    }while( i < 8)
+       
+    return new Promise(function(resolve, reject) {
+        resolve(
+            allNote
+        );
+    })};

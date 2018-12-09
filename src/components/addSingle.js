@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { addNote } from '../actions/actionNote';
 
-class addSingle extends React.Component{
+class addSingle extends Component{
     constructor(props){
         super(props)
         this.state = {

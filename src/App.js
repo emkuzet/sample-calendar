@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { fetchDataSuccess } from './actions/actionsFetch';
 import Search from "./components/search";
 import Calendar from "./components/calendar";
+import editSingle from "./components/editSingle";
+import addSingle from "./components/addSingle";
 import './App.scss';
 
 const Index = () => <h2>Home</h2>;
@@ -40,8 +42,10 @@ class App extends Component {
             </nav>
 
             <Route path="/" exact component={Index} />
-            <Route path="/Search/" component={Search} />
-            <Route path="/Calendar/" component={Calendar} />
+            <Route path="/search/" component={Search} />
+            <Route path="/calendar/" component={Calendar} />
+            <Route path="/edit/:date" component={editSingle} />
+            <Route path="/add/:date" component={addSingle} />
           </div>
         </Router>
     );

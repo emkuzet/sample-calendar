@@ -29,14 +29,18 @@ function createMonthCalendar(inputMonth, inputYear){
             inputDay = '0' + inputDay.toString() ;
         }
 
-        allMonth.push( new Object({ date:  inputDay + '-' + inputMonth +  '-2018', note: ''}));
+        allMonth.push({date:  inputDay + '-' + inputMonth +  '-2018', note: ''});
     } while (calendarDay < daysCount );
     return allMonth;
 
 }
 
 
-export const fillCalendar = () => ({
-    type: types.FILL_DATA,
+export const fillCalendar = (date, note) => ({
+    type: types.EDIT_CALENDAR,
+    date: date,
+    note: note
 });
+
+
 

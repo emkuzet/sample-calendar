@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { editNote, addNote } from '../actions/actionNote';
 
-class editSingle extends React.Component {
+class editSingle extends Component {
 
     constructor(props){
         super(props)
@@ -10,7 +10,7 @@ class editSingle extends React.Component {
             date: this.props.match.params.date ,
             note: ''
         }
-
+        
         this.editNote = this.editNote.bind(this);
         this.submitNote = this.submitNote.bind(this);
         
@@ -18,16 +18,19 @@ class editSingle extends React.Component {
 
     componentWillMount(){
         this.setInput()
+        
     }
 
     setInput(){
-        this.props.fetchSingle(this.props.match.params.date);
-        console.log(this.props)
-        this.setState((state)=>{
-            return{
-                note : this.props.editItem
-            }
-        })
+        const promise = this.props.fetchSingle(this.props.match.params.date)
+            promise.then( (value) =>{
+                this.setState((state)=>{
+                    return{
+                        note : this.props.editItem[0]
+                    }
+                })
+            }     
+        )
     }
 
 

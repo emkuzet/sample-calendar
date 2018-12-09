@@ -1,7 +1,8 @@
 import * as types from './actionTypes';
 import axios from 'axios';
 import { fillNote } from './actionNote';
-import { fillCalendar} from './action'
+import { fillCalendar } from './action';
+
 
 export const fetchData = () => ({
     type: types.FETCH_DATA,
@@ -23,8 +24,12 @@ export const fetchDataSuccess = ( currentMonth ) => dispatch => {
         // handle success
         dispatch(fetchDataComplete(response.data.results));
         // fill note
-        dispatch(fillNote(response.data.results, currentMonth ));
-        dispatch(fillCalendar());
+        var promise = dispatch(fillNote(response.data.results, currentMonth ));
+        promise.then( function(value){
+                value.map( data => dispatch(fillCalendar(data.date, data.note)))
+            }
+        )
+
       })
       .catch(function (error) {
         dispatch(fetchError());
