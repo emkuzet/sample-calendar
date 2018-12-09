@@ -1,4 +1,5 @@
 import * as types from './actionTypes';
+import  { editNoteValue } from './actionNote';
 
 export const createCalendar = (inputMonth, inputYear) => ({
     type: types.CREATE_CALENDAR,
@@ -43,4 +44,11 @@ export const fillCalendar = (date, note) => ({
 });
 
 
+export const updateCalendar = (sampleData) => dispatch => {
+    console.log(sampleData);
+    sampleData.map((single) => {
+        console.log(single);
+        dispatch(fillCalendar(single.date, single.note))
+    })
+};
 

@@ -30,7 +30,7 @@ class addSingle extends Component{
     render(){
         return(
                 <div>
-                    <h3>Edytuj treśc wpisu z dnia { this.props.match.params.date }</h3>
+                    <div className="menu-title">Dodaj nowy wpis { this.props.match.params.date }</div>
                     <input onChange={(e) => this.editNote(e) } name="note" type="text" />
                     <button onClick={this.submitNote}> Zapisz </button>
                 </div>

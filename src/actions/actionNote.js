@@ -31,7 +31,7 @@ export const fillSingleNote = (sampleData, eventDate) => ({
     note: sampleData[getRandomInt(9)].name
   })
 
-function addZero( singleDay){
+export function addZero( singleDay){
 
     let defaultValue = singleDay;
     singleDay = singleDay.toString().length;

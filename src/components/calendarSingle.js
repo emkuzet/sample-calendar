@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { editCalendar } from '../actions/action';
 import { BrowserRouter as Router,  Link } from "react-router-dom";
 
-class SearchSingle extends Component{
+class CalendarSingle extends Component{
 
     constructor(props){
         super(props)
@@ -26,7 +26,7 @@ class SearchSingle extends Component{
         }
 
         return(
-            <div className="single-day" onClick={(e) => this.editItem(this.props.number)}>
+            <div className="single-day">
                <Link to={'../add/' + this.props.number } className="single-day-number">
                     {this.props.number}
                </Link>
@@ -46,4 +46,4 @@ const actionToProps =  dispatch => ({
     EditCalendar : (id) => dispatch(editCalendar(id))
 })
 
-export default connect(stateToProps,actionToProps)(SearchSingle);
+export default connect(stateToProps,actionToProps)(CalendarSingle);

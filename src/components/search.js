@@ -1,86 +1,110 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { createCalendar, fillCalendar } from '../actions/action';
-import SearchSingle from './searchSingle';
+import { connect } from 'react-redux'
+import * as R from 'ramda';
+import { BrowserRouter as Router,  Link } from "react-router-dom";
 import './search.scss';
 
 class Search extends Component {
 
     constructor(props){
         super(props)
+
         this.state = {
-            currentMonth : new Date().getMonth(),
-            currentYear : new Date().getFullYear()
-        }
-
-        this.FillCalendar = this.FillCalendar.bind(this);
-        this.createCalendarOnInit = this.createCalendarOnInit.bind(this);
-        this.createCalendarNext = this.createCalendarNext.bind(this);
-        this.createCalendarPrev = this.createCalendarPrev.bind(this);
+            filterStatus: false,
+            filter: []
+        };
+        this.checkinput = this.checkinput.bind(this);
     }
 
-    createCalendarNext(){
+    checkinput(event){
+        let inputValue = event.target.value;
+        
+
+        const regex = new RegExp("(" + inputValue + ")");
+        const isEven = n => R.test(regex, n.note);
+        
+        const filteredValue = R.filter(
+                isEven , this.props.noteList
+            )
+
+        const sortByDate = R.sortBy(R.prop('date'));
+        const sortedbyDate = sortByDate(filteredValue);
+
         this.setState((state) => {
-            return { currentMonth: state.currentMonth + 1};
-        });
-          
-        this.props.createCalendarOnInit( this.state.currentMonth, this.state.currentYear )
+                return {
+                    filterStatus: true,
+                    filter: sortedbyDate
+                }
+            }
+        )
     }
-
-    createCalendarPrev(){
-        this.setState((state) => {
-            return { currentMonth: state.currentMonth - 1};
-        });
-
-        this.props.createCalendarOnInit( this.state.currentMonth, this.state.currentYear )
-    }
-
-    createCalendarOnInit(){
-
-        this.props.createCalendarOnInit(this.state.currentMonth, this.state.currentYear)
-    }
-
-    FillCalendar(){
-        this.props.FillCalendar(this.props.sampleData);
-    }
-
-    componentDidMount(){
-        let currentMonth = new Date().getMonth();
-        let currentYear= new Date().getFullYear();
-
-        this.props.createCalendarOnInit(currentMonth, currentYear)
-    }
-
-    
-    render() {
  
+    render(){
+        console.log(this.state.filter);
+        let dataToShow 
+
+        if( this.state.filterStatus){
+            
+          dataToShow = <NoteListFilter props={this.state.filter}/>
+        
+        }else{
+
+            dataToShow = <NoteList props={this.props.noteList}/>
+        };
+
+
         return(
-            <div className="Container">
-                 <div className="Navigation">
-                    <div className="nextMonth" onClick={this.createCalendarNext}> NextMonth </div>
-                    <div className="resetData" onClick={this.createCalendarOnInit}> Reset </div>
-                    <div className="fetchData" onClick={this.FillCalendar}> Fetch Data </div>
-                    <div className="prevMonth" onClick={this.createCalendarPrev}> PrevMonth </div>
-                </div>
-
-                 <div className="Calendar">
-                    {this.props.calendarItem.map((days, index )  => 
-                        <SearchSingle key={index} number={days.date} note={days.note} /> , this
-                    )}
-                </div>
+            <div className="input-container">
+                <input className="input" type='text' onChange={(event) => this.checkinput(event)} />
+                {dataToShow}
             </div>
-           
-        );
+        )
     }
+    
+}
+
+function NoteList(props){
+    
+    const allNotes = props ? props : null;
+
+    const sortByDate = R.sortBy(R.prop('date'));
+    const sortedbyDate = sortByDate(allNotes.props);
+
+
+    const allNoteList = sortedbyDate.map( (single , index) => 
+        <li key={index}>
+            <Link to={'../edit/'+ single.date} > {single.date} </Link>
+            {single.note}
+        </li>
+     )
+
+    return(
+        <ul>{allNoteList}</ul>
+    )
+}
+
+function NoteListFilter(input){
+    const allNoteList = input.props.map( (single , index) => 
+        <li key={index} >
+            <Link to={'../edit/'+ single.date} > {single.date} </Link>
+            {single.note}
+        </li>
+     )
+
+     return(
+        <ul>{allNoteList}</ul>
+    )
+        
+}
+
+
+const stateToProps = state =>{
+        return state
 };
 
-const stateToProps = (state) => {
-       return state
-};
-
-const actionToProps =  dispatch => ({
-    createCalendarOnInit : (inputMonth, inputYear) => dispatch(createCalendar(inputMonth, inputYear)),
-    FillCalendar : (sampleData) => dispatch(fillCalendar(sampleData))
+const actionToProps = dispatch =>({
+    
 })
+
 
 export default connect(stateToProps,actionToProps)(Search);

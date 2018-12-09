@@ -28,22 +28,18 @@ class App extends Component {
         <Router>
            <div>
             <nav>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
+              <ul className="main-nav">
+                <li className="main-nav-item">
+                  <Link to="/">Kalendarz</Link>
                 </li>
-                <li>
-                  <Link to="/search/">search</Link>
-                </li>
-                <li>
-                  <Link to="/calendar/">calendar</Link>
+                <li className="main-nav-item">
+                  <Link to="/search/">Przeglądaj</Link>
                 </li>
               </ul>
             </nav>
 
-            <Route path="/" exact component={Index} />
+            <Route path="/" exact component={Calendar} />
             <Route path="/search/" component={Search} />
-            <Route path="/calendar/" component={Calendar} />
             <Route path="/edit/:date" component={editSingle} />
             <Route path="/add/:date" component={addSingle} />
           </div>
