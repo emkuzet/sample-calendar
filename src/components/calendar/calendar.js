@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createCalendar, editCalendar, updateCalendar } from '../actions/action';
+import { createCalendar, editCalendar, updateCalendar } from '../../actions/action';
 import CalendarSingle from './calendarSingle';
 import './calendar.scss';
 
-class Calendar extends Component {
+export class Calendar extends Component {
 
     constructor(props){
         super(props)
@@ -29,14 +29,11 @@ class Calendar extends Component {
 
     render() {
         return(
-            <div>
-                 <div className="Calendar">
+                 <div className="calendar">
                     {this.props.calendarItem.map((days, index )  => 
                         <CalendarSingle key={index} date={days.date} note={days.note} /> , this
                     )}
-                </div>
-            </div>
-           
+                </div>           
         );
     }
 };

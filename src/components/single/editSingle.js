@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { editNote, fetchNote } from '../actions/actionNote';
+import { editNote, fetchNote } from '../../actions/actionNote';
 import { BrowserRouter as Router,  Link } from "react-router-dom";
 
 class editSingle extends Component {

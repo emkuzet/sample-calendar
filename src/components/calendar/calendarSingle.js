@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router,  Link } from "react-router-dom";
 
-class CalendarSingle extends Component{
+export class CalendarSingle extends Component{
     constructor(props){
         super(props)
     }

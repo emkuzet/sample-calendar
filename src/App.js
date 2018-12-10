@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { fetchInit } from './actions/actionsFetch';
-import Search from "./components/search";
-import Calendar from "./components/calendar";
-import editSingle from "./components/editSingle";
-import addSingle from "./components/addSingle";
+import Search from "./components/search/search";
+import Calendar from "./components/calendar/calendar";
+import editSingle from "./components/single/editSingle";
+import addSingle from "./components/single/addSingle";
 import './App.scss';
 
 const Index = () => <h2>Home</h2>;
 
 
-class App extends Component {
+export class App extends Component {
 
   componentWillMount(){
 
