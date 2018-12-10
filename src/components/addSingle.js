@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { addNote } from '../actions/actionNote';
+import { BrowserRouter as Router,  Link } from "react-router-dom";
 
 class addSingle extends Component{
     constructor(props){
@@ -29,10 +30,10 @@ class addSingle extends Component{
 
     render(){
         return(
-                <div>
-                    <div className="menu-title">Dodaj nowy wpis { this.props.match.params.date }</div>
-                    <input onChange={(e) => this.editNote(e) } name="note" type="text" />
-                    <button onClick={this.submitNote}> Zapisz </button>
+                <div className="section-add">
+                    <p className="section-title">Dodaj nowy wpis { this.props.match.params.date }</p>
+                    <input className="section-input" onChange={(e) => this.editNote(e) } name="note" type="text" />
+                    <Link to="/" onClick={this.submitNote}>Zapisz</Link>
                 </div>
         )
     }

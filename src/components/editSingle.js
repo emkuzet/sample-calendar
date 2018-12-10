@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { editNote, addNote } from '../actions/actionNote';
+import { editNote, fetchNote } from '../actions/actionNote';
+import { BrowserRouter as Router,  Link } from "react-router-dom";
 
 class editSingle extends Component {
 
@@ -10,19 +11,16 @@ class editSingle extends Component {
             date: this.props.match.params.date ,
             note: ''
         }
-        
         this.editNote = this.editNote.bind(this);
         this.submitNote = this.submitNote.bind(this);
-        
     }
 
     componentWillMount(){
         this.setInput()
-        
     }
 
     setInput(){
-        const promise = this.props.fetchSingle(this.props.match.params.date)
+        const promise = this.props.fetchSingleNote(this.props.match.params.date)
             promise.then( (value) =>{
                 this.setState((state)=>{
                     return{
@@ -44,16 +42,15 @@ class editSingle extends Component {
     }
 
     submitNote(){
-        console.log(this.props.addSingle(this.state.date, this.state.note))
+        this.props.editSingleNote(this.state.date, this.state.note)
     }
 
     render(){
-
         return(
-                <div>
-                    <h3>Edytuj treśc wpisu z dnia { this.props.match.params.date }</h3>
-                    <input onChange={(e) => this.editNote(e) } name="note" type="text" value={this.state.note} />
-                    <button onClick={this.submitNote}> Zapisz </button>
+                <div className="section-edit">
+                    <p className="section-title">Edytuj treśc wpisu z dnia { this.props.match.params.date }</p>
+                    <input className="section-input" onChange={(e) => this.editNote(e) } name="note" type="text" value={this.state.note} />
+                    <Link to='/search' onClick={this.submitNote}> Zapisz </Link>
                 </div>
         )
     }
@@ -64,9 +61,8 @@ const stateToProps = state =>{
 };
 
 const actionToProps = dispatch =>({
-    fetchSingle : (date) => dispatch(editNote(date)),
-    addSingle : (date, note) => dispatch(addNote(date,note))
+    fetchSingleNote : (date) => dispatch(fetchNote(date)),
+    editSingleNote : (date, note) => dispatch(editNote(date,note))
 })
-
 
 export default connect(stateToProps,actionToProps)(editSingle);

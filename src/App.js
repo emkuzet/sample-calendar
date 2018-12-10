@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { fetchDataSuccess } from './actions/actionsFetch';
+import { fetchInit } from './actions/actionsFetch';
 import Search from "./components/search";
 import Calendar from "./components/calendar";
 import editSingle from "./components/editSingle";
@@ -15,8 +15,8 @@ class App extends Component {
 
   componentWillMount(){
 
-     const currentMonth = new Date().getMonth() + "-" +  new Date().getFullYear() 
-     this.props.pullApi( currentMonth );
+     const currentMonth = (new Date().getMonth() +1) + "-" +  new Date().getFullYear() 
+     this.props.fetchInit( currentMonth );
   }
 
   componentDidMount(){
@@ -26,7 +26,7 @@ class App extends Component {
   render() {
     return (
         <Router>
-           <div>
+           <div  className="container">
             <nav>
               <ul className="main-nav">
                 <li className="main-nav-item">
@@ -54,7 +54,7 @@ const stateToProps = (state) => {
 
 const actionToProps =  dispatch => (
   {
-    pullApi : (currentMonth) => dispatch(fetchDataSuccess(currentMonth))
+    fetchInit: (currentMonth) => dispatch(fetchInit(currentMonth))
   }
 )
 

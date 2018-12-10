@@ -1,63 +1,68 @@
 import * as types from './actionTypes';
-import {getRandomInt } from './helpers';
-import { fillCalendar} from './action'
+import { getRandomInt } from './helpers';
 
-export const addNote = (date ,sampleData) => ({
+export const addNote = (date , noteValue) => ({
     type: types.ADD_NOTE,
     date: date, 
-    note: sampleData
+    note: noteValue
 });
 
-
-
-
-export const editNoteValue = (date) => ({
+export const editNote = (date , noteValue) => ({
     type: types.EDIT_NOTE,
-    date: date,
+    date: date, 
+    note: noteValue
 });
 
+export const fetchNote = (date) => dispatch => {  
+    return new Promise (function(resolve) {
+        resolve( 
+            dispatch({
+                type: types.FETCH_NOTE,
+                date: date,
+            })
+        )
+    })
+}
 
-export const editNote = (date ) => dispatch => {
-    return new Promise (function(resolve, reject) {
-          resolve(
-            dispatch(editNoteValue(date))
-          );
-        
-      })};
-
-export const fillSingleNote = (sampleData, eventDate) => ({
+export const fillSingleNote = (dataFromApi, eventDate) => ({
     type: types.FILL_NOTE,
     date: eventDate, 
-    note: sampleData[getRandomInt(9)].name
+    note: dataFromApi
   })
 
-export function addZero( singleDay){
+export function addZero( inputDate){
 
-    let defaultValue = singleDay;
-    singleDay = singleDay.toString().length;
+    let defaultValue = inputDate;
+    inputDate = inputDate.toString().length;
 
-    if (singleDay === 1 ){
+    if (inputDate === 1 ){
         return defaultValue =  '0' + defaultValue  
     }else{
         return defaultValue;
     }
 }
 
-
-
-export const fillNote = (sampleData, currentMonth) => dispatch => {
-
-    let allNote = []
-    let i = 0
+export const fillNote = (dataFromApi, currentMonth) => dispatch => {
+    return new Promise( function(resolve){
+        const allNotes = [];
+        let singleNote;
+        let currentItem = 0;
+        const itemLimit = 5;
+        
+        do{
+            singleNote = dispatch(
+                fillSingleNote(
+                            dataFromApi[getRandomInt(9)].name, 
+                            addZero(getRandomInt(28)) + '-' + currentMonth
+                        )
+                    )
     
-    do{
-        i = i + 1;
-       
-        allNote.push(dispatch(fillSingleNote(sampleData, addZero(getRandomInt(28)) + '-' + currentMonth)))
-    }while( i < 8)
-       
-    return new Promise(function(resolve, reject) {
+            allNotes.push(singleNote)
+            currentItem = currentItem + 1;
+    
+        }while(currentItem < itemLimit)
+
         resolve(
-            allNote
-        );
-    })};
+            allNotes
+        )
+})};
