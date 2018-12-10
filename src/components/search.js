@@ -67,9 +67,10 @@ function NoteList(props){
     const sortedbyDate = sortByDate(allNotes.props);
 
     const allNoteList = sortedbyDate.map( (single , index) => 
-        <li key={index}>
-            <Link to={'../edit/'+ single.date} > {single.date} </Link>
-            {single.note}
+        <li className="single-search" key={index}>
+            <div className="single-search-name">{single.note} -  
+                <Link to={'../edit/'+ single.date} > {single.date}</Link>
+            </div> 
         </li>
      )
 
@@ -81,9 +82,10 @@ function NoteList(props){
 function NoteListFilter(input){
 
     const allNoteList = input.props.map( (single , index) => 
-        <li key={index} >
-            <Link to={'../edit/'+ single.date} > {single.date} </Link>
-            {single.note}
+        <li className="single-search" key={index} >
+            <div className="single-search-name">{single.note} -  
+                <Link to={'../edit/'+ single.date} > {single.date}</Link>
+            </div> 
         </li>
      )
 

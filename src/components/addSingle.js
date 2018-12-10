@@ -33,7 +33,7 @@ class addSingle extends Component{
                 <div className="section-add">
                     <p className="section-title">Dodaj nowy wpis { this.props.match.params.date }</p>
                     <input className="section-input" onChange={(e) => this.editNote(e) } name="note" type="text" />
-                    <Link to="/" onClick={this.submitNote}>Zapisz</Link>
+                    <Link className="section-submit" to="/" onClick={this.submitNote}>Zapisz</Link>
                 </div>
         )
     }

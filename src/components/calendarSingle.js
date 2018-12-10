@@ -12,21 +12,29 @@ class CalendarSingle extends Component{
         let singleNote;  
         
         if(this.props.note){
-            singleNote = <div className="single-note">{this.props.note}</div>
+            singleNote = 
+            <Link to={'../edit/' + this.props.date }>
+                <div className="single-day">
+                <div className="single-day-number">
+                        {this.props.date}
+                </div>
+                <div className="single-note">{this.props.note}</div>
+                </div>
+            </Link>
         }else{
-            singleNote = null;
+            singleNote = <Link to={'../add/' + this.props.date }>
+            <div className="single-day">
+            <div className="single-day-number">
+                    {this.props.date}
+            </div>
+           
+            </div>
+        </Link>
         }
 
         return(
             <div>
-                <Link to={'../add/' + this.props.date }>
-                    <div className="single-day">
-                    <div className="single-day-number">
-                            {this.props.date}
-                    </div>
-                        {singleNote}
-                    </div>
-                </Link>
+                {singleNote}
             </div>
 
         )

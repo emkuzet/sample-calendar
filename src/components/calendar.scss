@@ -23,6 +23,10 @@
         border: 1px solid #e9e9e9;
         display: flex;
     }
+
+    .single-day:hover{
+        border: 1px solid #333;
+    }
     
     .single-day-number{
        align-self: flex-end;
@@ -39,4 +43,37 @@
         font-size: 12px;
     }
 }
+
+@mixin default{
+    border-radius: 10px;
+    background: #eee;
+    border: 0px;
+    font-size: 16px;
+}
+
+
+.section-add, .section-edit{
+    .section-input{
+        @include default();
+        display:block;
+        width: 250px;
+        height: 30px;
+        padding-left: 20px;
+    }
+
+    .section-submit{
+        @include default();
+        display:block;
+        margin: 10px;
+        padding: 10px;
+        width: 80px;
+        text-align: center;
+    }
+
+    .section-submit:hover{
+       background: #efefef;
+    }
+}
+
+
 

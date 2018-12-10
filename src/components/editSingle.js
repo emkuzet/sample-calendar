@@ -50,7 +50,7 @@ class editSingle extends Component {
                 <div className="section-edit">
                     <p className="section-title">Edytuj treśc wpisu z dnia { this.props.match.params.date }</p>
                     <input className="section-input" onChange={(e) => this.editNote(e) } name="note" type="text" value={this.state.note} />
-                    <Link to='/search' onClick={this.submitNote}> Zapisz </Link>
+                    <Link className="section-submit" to='/search' onClick={this.submitNote}> Zapisz </Link>
                 </div>
         )
     }
