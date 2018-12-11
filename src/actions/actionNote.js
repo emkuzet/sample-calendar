@@ -14,6 +14,7 @@ export const editNote = (date , noteValue) => ({
 });
 
 export const fetchNote = (date) => dispatch => {  
+
     return new Promise (function(resolve) {
         resolve( 
             dispatch({
@@ -47,7 +48,7 @@ export const fillNote = (dataFromApi, currentMonth) => dispatch => {
         const allNotes = [];
         let singleNote;
         let currentItem = 0;
-        const itemLimit = 5;
+        const itemLimit = 10;
         
         do{
             singleNote = dispatch(

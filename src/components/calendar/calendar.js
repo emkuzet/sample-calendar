@@ -31,7 +31,7 @@ export class Calendar extends Component {
         return(
                  <div className="calendar">
                     {this.props.calendarItem.map((days, index )  => 
-                        <CalendarSingle key={index} date={days.date} note={days.note} /> , this
+                        <CalendarSingle key={index} date={days.date} note={days.note} />
                     )}
                 </div>           
         );
