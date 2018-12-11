@@ -40,7 +40,6 @@ class Search extends Component {
     }
  
     render(){
-        console.log(this.state.filter);
         let dataToShow 
 
         if( this.state.filterStatus){

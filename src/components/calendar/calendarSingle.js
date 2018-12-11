@@ -13,12 +13,17 @@ export class CalendarSingle extends Component{
         
         if(this.props.note){
             singleNote = 
-            <Link to={'../edit/' + this.props.date }>
+            <Link to={'../add/' + this.props.date }>
                 <div className="single-day">
                 <div className="single-day-number">
                         {this.props.date}
                 </div>
-                <div className="single-note">{this.props.note}</div>
+                    <div className="single-box">
+                    {this.props.note.map((single,index) =>
+                        <div className="single-note">{single.note}</div>
+                    )}
+                    </div>
+               
                 </div>
             </Link>
         }else{
