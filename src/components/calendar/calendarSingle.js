@@ -19,22 +19,23 @@ export class CalendarSingle extends Component{
                         {this.props.date}
                 </div>
                     <div className="single-box">
-                    {this.props.note.map((single,index) =>
-                        <div className="single-note">{single.note}</div>
-                    )}
+                        {this.props.note.map((single,index) =>
+                            <div key={index} className="single-note">{single.note}</div>
+                        )}
                     </div>
                
                 </div>
             </Link>
         }else{
-            singleNote = <Link to={'../add/' + this.props.date }>
-            <div className="single-day">
-            <div className="single-day-number">
-                    {this.props.date}
-            </div>
-           
-            </div>
-        </Link>
+            singleNote = 
+            <Link to={'../add/' + this.props.date }>
+                <div className="single-day">
+                <div className="single-day-number">
+                        {this.props.date}
+                </div>
+            
+                </div>
+            </Link>
         }
 
         return(

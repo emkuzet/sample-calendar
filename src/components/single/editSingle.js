@@ -15,7 +15,7 @@ class editSingle extends Component {
         this.submitNote = this.submitNote.bind(this);
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.setInput()
     }
 
