@@ -27,8 +27,19 @@ class Search extends Component {
                 isMatch , this.props.noteList
             )
 
-        const sortByDate = R.sortBy(R.prop('date'));
-        const sortedbyDate = sortByDate(filteredValue);
+        console.log(filteredValue)
+
+        const toSort = filteredValue.map((single) =>  {
+            return{
+                    date: single.date.toString(),
+                    sort: single.date.getTime(),
+                    note: single.note
+                }
+            }
+        );
+
+        const sortByDate = R.sortBy(R.prop('sort'));
+        const sortedbyDate = sortByDate(toSort);
 
         this.setState((state) => {
                 return {
@@ -48,8 +59,10 @@ class Search extends Component {
             dataToShow = <NoteList props={this.props.noteList}/>
         };
 
+        console.log(this.props);
 
         return(
+            
             <div className="input-container">
                 <input className="input" type='text' onChange={(event) => this.checkinput(event)} />
                 {dataToShow}
@@ -61,19 +74,19 @@ class Search extends Component {
 
 function NoteList(props){
 
+    /* TODO - Sort by date */
     const allNotes = props ? props : null;
     const allNotesArray =  allNotes.props.map((single) =>  {
         return{
                 date: single.date.toString(),
+                sort: single.date.getTime(),
                 note: single.note
             }
         }
-    )
+    );
 
-    const sortByDate = R.sortBy(R.prop('date'));
+    const sortByDate = R.sortBy(R.prop('sort'));
     const sortedbyDate = sortByDate(allNotesArray);
-
-    console.log(sortedbyDate);
 
     const allNoteList = sortedbyDate.map( (single , index) => 
         <li className="single-search" key={index}>
