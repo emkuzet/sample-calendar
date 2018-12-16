@@ -31,18 +31,6 @@ export const fillSingleNote = (dataFromApi, eventDate) => ({
     note: dataFromApi
   })
 
-export function addZero( inputDate){
-
-    let defaultValue = inputDate;
-    inputDate = inputDate.toString().length;
-
-    if (inputDate === 1 ){
-        return defaultValue =  '0' + defaultValue  
-    }else{
-        return defaultValue;
-    }
-}
-
 export const fillNote = (dataFromApi, currentMonth) => dispatch => {
     return new Promise( function(resolve){
         const allNotes = [];
@@ -54,10 +42,9 @@ export const fillNote = (dataFromApi, currentMonth) => dispatch => {
             singleNote = dispatch(
                 fillSingleNote(
                             dataFromApi[getRandomInt(9)].name, 
-                            addZero(getRandomInt(28)) + '-' + currentMonth
+                            new Date(2018, 11, getRandomInt(28))
+                            )  
                         )
-                    )
-    
             allNotes.push(singleNote)
             currentItem = currentItem + 1;
     

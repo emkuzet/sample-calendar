@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { BrowserRouter as Router,  Link } from "react-router-dom";
 
 export class CalendarSingle extends Component{
@@ -7,16 +6,15 @@ export class CalendarSingle extends Component{
         super(props)
     }
 
-
     render() {
         let singleNote;  
         
         if(this.props.note){
             singleNote = 
-            <Link to={'../add/' + this.props.date }>
+            <Link to={'../add/' }>
                 <div className="single-day">
                 <div className="single-day-number">
-                        {this.props.date}
+                    {(this.props.date.getDate()) + '-' +(this.props.date.getMonth()) + '-' + (this.props.date.getFullYear())}    
                 </div>
                     <div className="single-box">
                         {this.props.note.map((single,index) =>
@@ -31,9 +29,8 @@ export class CalendarSingle extends Component{
             <Link to={'../add/' + this.props.date }>
                 <div className="single-day">
                 <div className="single-day-number">
-                        {this.props.date}
+                    {(this.props.date.getDate()) + '-' +(this.props.date.getMonth()) + '-' + (this.props.date.getFullYear())}                       
                 </div>
-            
                 </div>
             </Link>
         }
@@ -47,12 +44,4 @@ export class CalendarSingle extends Component{
     }
 }
 
-
-const stateToProps = (state) => {
-    return state
-};
-
-const actionToProps =  dispatch => ({
-})
-
-export default connect(stateToProps,actionToProps)(CalendarSingle);
+export default CalendarSingle;

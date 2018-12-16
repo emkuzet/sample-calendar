@@ -12,8 +12,13 @@ const calendarReducer = (state = [], action) => {
       case types.EDIT_CALENDAR:
         return{
           ...state,
-          calendarItem : state.calendarItem.map((singleDay) => singleDay.date === action.date ? 
-            {...singleDay, note : [ ...singleDay.note, {note: action.note }]} : singleDay)
+          calendarItem : state.calendarItem.map(
+            (singleDay) => 
+                singleDay.date.toString() === action.date.toString() ? 
+                {...singleDay, note : [
+                  ...singleDay.note, {note: action.note }
+                ]} : singleDay
+            )
         }
 
       // fetchdata

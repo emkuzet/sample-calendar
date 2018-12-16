@@ -4,25 +4,22 @@ export function getRandomInt(max) {
 }
 
 export function daysInMonth(inputMonth, inputYear) {
-  return new Date(inputYear, inputMonth, 0).getDate() + 1;
+  return new Date(inputYear, inputMonth + 1 , 0).getDate();
 }
 
 export function createMonthCalendar(inputMonth, inputYear){
   const daysCount = daysInMonth(inputMonth, inputYear);
-  let calendarDay = 0;
+  let calendarDay = 1;
   let allMonth = [];
   
   do {
+      
+      let inputDay = new Date(inputYear,inputMonth,calendarDay);
       calendarDay = calendarDay + 1;
-      let inputDay = calendarDay;
-      let dayLength = calendarDay.toString().length;
+      allMonth.push({date:  inputDay , note: ''});
 
-      if( dayLength  === 1 ){
-          inputDay = '0' + inputDay.toString() ;
-      }
+  } while (calendarDay <= daysCount );
 
-      allMonth.push({date:  inputDay + '-' + (inputMonth + 1)+  '-2018', note: ''});
-  } while (calendarDay < daysCount );
   return allMonth;
 
 }
