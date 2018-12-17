@@ -2,7 +2,6 @@ import * as types from '../actions/actionTypes';
 
 const calendarReducer = (state = [], action) => {
     switch (action.type) {
-      // calendar
       case types.CREATE_CALENDAR:
         return{
           ...state,
@@ -51,7 +50,7 @@ const calendarReducer = (state = [], action) => {
 
       case types.FETCH_NOTE:
       
-        const beforeFilter = state.noteList.map((singleEvent) => singleEvent.date === action.date ?  singleEvent.note : false   )
+        const beforeFilter = state.noteList.map((singleEvent) => singleEvent.date.toString() === action.date.toString() ?  singleEvent.note : false   )
         const filteredSingleItem = beforeFilter.filter((singleElement)=>{
           return singleElement !== false;
         })
@@ -64,7 +63,7 @@ const calendarReducer = (state = [], action) => {
       case types.EDIT_NOTE:
         return{
           ...state,
-          noteList : state.noteList.map((singleDay) => singleDay.date === action.date ? {...singleDay, note : action.note }: singleDay)
+          noteList : state.noteList.map((singleDay) => singleDay.date.toString() === action.date.toString() ? {...singleDay, note : action.note }: singleDay)
   
         }
       

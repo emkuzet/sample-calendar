@@ -27,11 +27,9 @@ class Search extends Component {
                 isMatch , this.props.noteList
             )
 
-        console.log(filteredValue)
-
         const toSort = filteredValue.map((single) =>  {
             return{
-                    date: single.date.toString(),
+                    date: single.date,
                     sort: single.date.getTime(),
                     note: single.note
                 }
@@ -73,12 +71,11 @@ class Search extends Component {
 }
 
 function NoteList(props){
-
-    /* TODO - Sort by date */
+    
     const allNotes = props ? props : null;
     const allNotesArray =  allNotes.props.map((single) =>  {
         return{
-                date: single.date.toString(),
+                date: single.date,
                 sort: single.date.getTime(),
                 note: single.note
             }
@@ -88,12 +85,18 @@ function NoteList(props){
     const sortByDate = R.sortBy(R.prop('sort'));
     const sortedbyDate = sortByDate(allNotesArray);
 
-    const allNoteList = sortedbyDate.map( (single , index) => 
-        <li className="single-search" key={index}>
-            <div className="single-search-name">{single.note} -  
-                <Link to={'../edit/'+ single.date} > {single.date}</Link>
-            </div> 
-        </li>
+
+
+    const allNoteList = sortedbyDate.map( (single , index) => { 
+        let singleDate = single.date.getDate() + '-' + single.date.getMonth() + '-' + single.date.getFullYear();
+
+
+        return  <li className="single-search" key={index}>
+                    <div className="single-search-name">{single.note} -  
+                        <Link to={'../edit/'+ singleDate} > {single.date.toString()}</Link>
+                    </div> 
+                </li>
+        }
      )
 
     return(
@@ -103,12 +106,17 @@ function NoteList(props){
 
 function NoteListFilter(input){
 
-    const allNoteList = input.props.map( (single , index) => 
-        <li className="single-search" key={index} >
-            <div className="single-search-name">{single.note} -  
-                <Link to={'../edit/'+ single.date} > {single.date}</Link>
-            </div> 
-        </li>
+
+
+    const allNoteList = input.props.map( (single , index) => {
+        let singleDate = single.date.getDate() + '-' + single.date.getMonth() + '-' + single.date.getFullYear();
+ 
+        return  <li className="single-search" key={index} >
+                    <div className="single-search-name">{single.note} -  
+                        <Link to={'../edit/'+ singleDate} > {single.date.toString()}</Link>
+                    </div> 
+                </li>
+        }
      )
 
      return(

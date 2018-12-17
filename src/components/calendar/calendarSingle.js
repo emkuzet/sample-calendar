@@ -8,13 +8,14 @@ export class CalendarSingle extends Component{
 
     render() {
         let singleNote;  
+        let singleDate = this.props.date.getDate() + '-' + this.props.date.getMonth() + '-' + this.props.date.getFullYear();
         
         if(this.props.note){
             singleNote = 
-            <Link to={'../add/' }>
+            <Link to={'../add/' + singleDate }>
                 <div className="single-day">
                 <div className="single-day-number">
-                    {(this.props.date.getDate()) + '-' +(this.props.date.getMonth()) + '-' + (this.props.date.getFullYear())}    
+                    {singleDate}    
                 </div>
                     <div className="single-box">
                         {this.props.note.map((single,index) =>
@@ -26,10 +27,10 @@ export class CalendarSingle extends Component{
             </Link>
         }else{
             singleNote = 
-            <Link to={'../add/' + this.props.date }>
+            <Link to={'../add/' + singleDate }>
                 <div className="single-day">
                 <div className="single-day-number">
-                    {(this.props.date.getDate()) + '-' +(this.props.date.getMonth()) + '-' + (this.props.date.getFullYear())}                       
+                    {singleDate}                       
                 </div>
                 </div>
             </Link>
