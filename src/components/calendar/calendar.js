@@ -23,7 +23,7 @@ export class Calendar extends Component {
     }
 
     increaseMonth(){
-        this.state = this.setState((state) => {
+        this.setState((state) => {
             this.props.createCalendarOnInit(state.currentMonth + 1, this.state.currentYear)
             this.props.updateCalendar(this.props.noteList )
             return {  currentMonth: state.currentMonth + 1  }
@@ -31,7 +31,7 @@ export class Calendar extends Component {
     }
 
     decreaseMonth(){
-        this.state = this.setState((state) => {
+        this.setState((state) => {
             this.props.createCalendarOnInit(state.currentMonth - 1, this.state.currentYear)
             this.props.updateCalendar(this.props.noteList )
             return {  currentMonth: state.currentMonth - 1  }

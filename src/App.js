@@ -8,9 +8,6 @@ import editSingle from "./components/single/editSingle";
 import addSingle from "./components/single/addSingle";
 import './App.scss';
 
-const Index = () => <h2>Home</h2>;
-
-
 export class App extends Component {
 
   componentWillMount(){

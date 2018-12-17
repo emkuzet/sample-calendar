@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router,  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 export class CalendarSingle extends Component{
-    constructor(props){
-        super(props)
-    }
-
+    
     render() {
 
         let singleNote;  
