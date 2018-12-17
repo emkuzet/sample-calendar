@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createCalendar, editCalendar, updateCalendar } from '../../actions/action';
 import CalendarSingle from './calendarSingle';
 import './calendar.scss';
+import PropTypes from 'prop-types';
 
 export class Calendar extends Component {
 
@@ -54,13 +55,23 @@ export class Calendar extends Component {
                     </div>
                     <div className="calendar">
                         {this.props.calendarItem.map((days, index)  => 
-                            <CalendarSingle key={index} date={ days.date } note={days.note} />
+                            <CalendarSingle key={index} date={days.date} note={days.note} />
                         )}
                     </div>    
                 </div>       
         );
     }
 };
+
+
+Calendar.propTypes = {
+    createCalendarOnInit: PropTypes.func,
+    increaseMonth: PropTypes.func,
+    decreaseMonth: PropTypes.func,
+    editCalendar: PropTypes.func,
+    updateCalendar: PropTypes.func
+}
+
 
 const stateToProps = (state) => {
        return state

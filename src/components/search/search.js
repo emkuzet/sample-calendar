@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as R from 'ramda';
 import { BrowserRouter as Router,  Link } from "react-router-dom";
 import './search.scss';
+import PropTypes from 'prop-types';
 
 class Search extends Component {
 
@@ -57,8 +58,6 @@ class Search extends Component {
             dataToShow = <NoteList props={this.props.noteList}/>
         };
 
-        console.log(this.props);
-
         return(
             
             <div className="input-container">
@@ -105,9 +104,6 @@ function NoteList(props){
 }
 
 function NoteListFilter(input){
-
-
-
     const allNoteList = input.props.map( (single , index) => {
         let singleDate = single.date.getDate() + '-' + single.date.getMonth() + '-' + single.date.getFullYear();
  
@@ -128,5 +124,9 @@ function NoteListFilter(input){
 const stateToProps = state =>{
         return state
 };
+
+Search.propTypes = {
+    input: PropTypes.array,
+}
 
 export default connect(stateToProps)(Search);

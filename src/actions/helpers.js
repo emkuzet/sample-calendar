@@ -16,7 +16,7 @@ export function createMonthCalendar(inputMonth, inputYear){
       
       let inputDay = new Date(inputYear,inputMonth,calendarDay);
       calendarDay = calendarDay + 1;
-      allMonth.push({date:  inputDay , note: ''});
+      allMonth.push({date:  inputDay , note: []});
 
   } while (calendarDay <= daysCount );
 
