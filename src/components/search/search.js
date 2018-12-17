@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as R from 'ramda';
-import { BrowserRouter as Router,  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './search.scss';
 import PropTypes from 'prop-types';
 
@@ -24,9 +24,7 @@ class Search extends Component {
         const regEx = new RegExp("(" + inputValue + ")");
         const isMatch = n => R.test(regEx, n.note);
         
-        const filteredValue = R.filter(
-                isMatch , this.props.noteList
-            )
+        const filteredValue = R.filter( isMatch , this.props.noteList )
 
         const toSort = filteredValue.map((single) =>  {
             return{
@@ -106,7 +104,6 @@ function NoteList(props){
 function NoteListFilter(input){
     const allNoteList = input.props.map( (single , index) => {
         let singleDate = single.date.getDate() + '-' + single.date.getMonth() + '-' + single.date.getFullYear();
- 
         return  <li className="single-search" key={index} >
                     <div className="single-search-name">{single.note} -  
                         <Link to={'../edit/'+ singleDate} > {single.date.toString()}</Link>
@@ -114,7 +111,6 @@ function NoteListFilter(input){
                 </li>
         }
      )
-
      return(
         <ul>{allNoteList}</ul>
     )
