@@ -9,7 +9,7 @@ const initStore = {
     sampleData : [],
     calendarItem: [],
     noteList: [],
-    editItem: {},
+    editItem: [],
 
 }
 

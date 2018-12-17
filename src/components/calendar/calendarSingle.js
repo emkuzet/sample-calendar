@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router,  Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 export class CalendarSingle extends Component{
     constructor(props){
@@ -7,6 +8,7 @@ export class CalendarSingle extends Component{
     }
 
     render() {
+
         let singleNote;  
         let singleDate = this.props.date.getDate() + '-' + this.props.date.getMonth() + '-' + this.props.date.getFullYear();
         
@@ -43,6 +45,11 @@ export class CalendarSingle extends Component{
 
         )
     }
+}
+
+CalendarSingle.propTypes = {
+    note: PropTypes.array,
+    date: PropTypes.object
 }
 
 export default CalendarSingle;
