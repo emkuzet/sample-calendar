@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { editNote, fetchNote } from '../../actions/actionNote';
 import { BrowserRouter as Router,  Link } from "react-router-dom";
 
+//Todo Rewrite //
+
 class editSingle extends Component {
 
     constructor(props){
@@ -15,12 +17,14 @@ class editSingle extends Component {
         this.submitNote = this.submitNote.bind(this);
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.setInput()
     }
 
     setInput(){
-        const promise = this.props.fetchSingleNote(this.props.match.params.date)
+        const dateBuilder = (this.state.date).split('-');
+        const newDate = new Date(dateBuilder[2], dateBuilder[1], dateBuilder[0]);
+        const promise = this.props.fetchSingleNote(newDate)
             promise.then( (value) =>{
                 this.setState((state)=>{
                     return{
@@ -32,24 +36,27 @@ class editSingle extends Component {
     }
 
 
-    editNote(e){
-        let input = e.target.value;
+    editNote(event){
+        let input = event.target.value;
         this.setState((state)=>{
             return {
                 note: input
             }
-        })
+        }
+        )
     }
 
     submitNote(){
-        this.props.editSingleNote(this.state.date, this.state.note)
+        const dateBuilder = (this.state.date).split('-');
+        const newDate = new Date(dateBuilder[2], dateBuilder[1], dateBuilder[0]);
+        this.props.editSingleNote(newDate, this.state.note);
     }
 
     render(){
         return(
                 <div className="section-edit">
                     <p className="section-title">Edytuj treśc wpisu z dnia { this.props.match.params.date }</p>
-                    <input className="section-input" onChange={(e) => this.editNote(e) } name="note" type="text" value={this.state.note} />
+                    <input className="section-input" type="text" value={this.state.note} onChange={(e) => this.editNote(e)}  />
                     <Link className="section-submit" to='/search' onClick={this.submitNote}> Zapisz </Link>
                 </div>
         )

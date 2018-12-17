@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { BrowserRouter as Router,  Link } from "react-router-dom";
 
 export class CalendarSingle extends Component{
@@ -7,34 +6,34 @@ export class CalendarSingle extends Component{
         super(props)
     }
 
-
     render() {
         let singleNote;  
+        let singleDate = this.props.date.getDate() + '-' + this.props.date.getMonth() + '-' + this.props.date.getFullYear();
         
         if(this.props.note){
             singleNote = 
-            <Link to={'../add/' + this.props.date }>
+            <Link to={'../add/' + singleDate }>
                 <div className="single-day">
                 <div className="single-day-number">
-                        {this.props.date}
+                    {singleDate}    
                 </div>
                     <div className="single-box">
-                    {this.props.note.map((single,index) =>
-                        <div className="single-note">{single.note}</div>
-                    )}
+                        {this.props.note.map((single,index) =>
+                            <div key={index} className="single-note">{single.note}</div>
+                        )}
                     </div>
                
                 </div>
             </Link>
         }else{
-            singleNote = <Link to={'../add/' + this.props.date }>
-            <div className="single-day">
-            <div className="single-day-number">
-                    {this.props.date}
-            </div>
-           
-            </div>
-        </Link>
+            singleNote = 
+            <Link to={'../add/' + singleDate }>
+                <div className="single-day">
+                <div className="single-day-number">
+                    {singleDate}                       
+                </div>
+                </div>
+            </Link>
         }
 
         return(
@@ -46,12 +45,4 @@ export class CalendarSingle extends Component{
     }
 }
 
-
-const stateToProps = (state) => {
-    return state
-};
-
-const actionToProps =  dispatch => ({
-})
-
-export default connect(stateToProps,actionToProps)(CalendarSingle);
+export default CalendarSingle;

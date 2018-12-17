@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { addNote } from '../../actions/actionNote';
 import { BrowserRouter as Router,  Link } from "react-router-dom";
 
+//Todo Rewrite //
+
 class addSingle extends Component{
     constructor(props){
         super(props)
@@ -25,10 +27,13 @@ class addSingle extends Component{
     }
 
     submitNote(){
-       this.props.addSingle(this.state.date, this.state.note);
+       const dateBuilder = (this.state.date).split('-')
+       const newDate = new Date(dateBuilder[2], dateBuilder[1], dateBuilder[0])
+
+       this.props.addSingle(newDate, this.state.note);
     }
 
-    render(){
+    render(){       
         return(
                 <div className="section-add">
                     <p className="section-title">Dodaj nowy wpis { this.props.match.params.date }</p>

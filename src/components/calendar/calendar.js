@@ -13,27 +13,51 @@ export class Calendar extends Component {
             currentYear : new Date().getFullYear()
         }
         this.createCalendarOnInit = this.createCalendarOnInit.bind(this);
+        this.increaseMonth = this.increaseMonth.bind(this);
+        this.decreaseMonth = this.decreaseMonth.bind(this);
     }
 
     createCalendarOnInit(){
         this.props.createCalendarOnInit(this.state.currentMonth, this.state.currentYear)
     }
 
-    componentDidMount(){
-        let currentMonth = new Date().getMonth();
-        let currentYear= new Date().getFullYear();
+    increaseMonth(){
+        this.state = this.setState((state) => {
+            this.props.createCalendarOnInit(state.currentMonth + 1, this.state.currentYear)
+            this.props.updateCalendar(this.props.noteList )
+            return {  currentMonth: state.currentMonth + 1  }
+        })
+    }
 
-        this.props.createCalendarOnInit(currentMonth, currentYear)
+    decreaseMonth(){
+        this.state = this.setState((state) => {
+            this.props.createCalendarOnInit(state.currentMonth - 1, this.state.currentYear)
+            this.props.updateCalendar(this.props.noteList )
+            return {  currentMonth: state.currentMonth - 1  }
+        })
+    }
+
+    componentDidMount(){
+        this.props.createCalendarOnInit(this.state.currentMonth, this.state.currentYear)
         this.props.updateCalendar(this.props.noteList )
     }
 
     render() {
         return(
-                 <div className="calendar">
-                    {this.props.calendarItem.map((days, index )  => 
-                        <CalendarSingle key={index} date={days.date} note={days.note} />
-                    )}
-                </div>           
+                <div>
+                    <div className="navigation">
+                        <ul className="main-nav">
+                            <li className="main-nav-item" onClick={this.increaseMonth}> Zwiększ </li>
+                            <li className="main-nav-item" onClick={this.decreaseMonth}> Zmniejsz </li>
+                        </ul>
+                      
+                    </div>
+                    <div className="calendar">
+                        {this.props.calendarItem.map((days, index)  => 
+                            <CalendarSingle key={index} date={ days.date } note={days.note} />
+                        )}
+                    </div>    
+                </div>       
         );
     }
 };
